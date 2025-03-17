@@ -1,5 +1,7 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines as well as the Dashboard.
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines as well as the Dashboard. 
+
+This version has only an implementation of host application architecture. Specific message formats, CAN packaging, and health checks have not yet been implemented.
 
 Code for just the Command Control State Machine can be found here: [Command Control State Machine](https://github.com/sharisseji/Waterloop-Command-Control-State-Machine.git)
 
@@ -9,7 +11,7 @@ Before cloning the repo, ensure you:
 ```
 pip install grpcio
 ```
-- Install CAN
+- Install CAN (for use in later versions)
 ```
 pip install python-can
 ```
