@@ -1,7 +1,7 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod.
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines as well as the Dashboard.
 
-In development. Waterloop's Hyperloop Pod is controlled by distributed flight computer hosted on a Raspberry Pi. This is the RPI host application's command control state machine, which parses commands between the web dashboard and the motor controller using gRPC and CAN.
+Code for just the Command Control State Machine can be found here: [Command Control State Machine](https://github.com/sharisseji/Waterloop-Command-Control-State-Machine.git)
 
 ## Cloning Instructions for Windows
 Before cloning the repo, ensure you:
