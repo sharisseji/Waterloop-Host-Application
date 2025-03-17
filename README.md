@@ -13,11 +13,12 @@ pip install grpcio
 ```
 pip install python-can
 ```
-## Running the central server
+## Running the Central Server
 Open a terminal and run:
 ```
 python HostServer.py
 ```
+This should open a local host. 
 Open a second terminal and run:
 ```
 python Dashboard_client.py
