@@ -3,7 +3,7 @@ In development. Code for the distributed flight computer host application of Wat
 
 Code for just the Command Control State Machine can be found here: [Command Control State Machine](https://github.com/sharisseji/Waterloop-Command-Control-State-Machine.git)
 
-## Cloning Instructions for Windows
+## Cloning Instructions
 Before cloning the repo, ensure you:
 - Install gRPC for Python
 ```
