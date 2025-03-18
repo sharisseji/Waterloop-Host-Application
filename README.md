@@ -42,7 +42,7 @@ When the clients are run, they are automatically registered to the server. The s
 [Server] Routing message: motor_control -> server: initialized
 ```
 
-For the Telemetry client it should look like:
+For the Telemetry client the initialization messages should be:
 ```
 [Telemetry] Client starting with ID: telemetry
 [Telemetry] Enter telemetry data (e.g., 'speed=50,temp=75'):
@@ -60,7 +60,7 @@ For the Motor Control client:
 [Motor] Waiting for commands...
 ```
 ## Sending Messages ##
-To send a motor control command from the Dashboard, enter the command in the Dashboard client. The server will update accordingly:
+To send a motor control command from the dashboard, enter the command in the dashboard client. The server will update accordingly:
 ```
 [Server] Received command from Dashboard: motor: <motor command>
 [Server] Routing message: dashboard -> motor_control: motor:<motor command>
@@ -72,7 +72,7 @@ The motor control will receive:
 [Motor] Executing motor command...
 ```
 
-To manually send telemetry updates (for testing), enter the command in the Telemetry client. The server will update accordingly:
+To manually send telemetry updates (for testing), enter the command in the telemetry client. The server will update accordingly:
 ```
 [Server] Received telemetry: telemetry:<telemetry update>
 [Server] Routing message: telemetry -> dashboard: telemetry:<telemetry update>
