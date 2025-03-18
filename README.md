@@ -31,14 +31,54 @@ python Dashboard_client.py
 ```
 Repeat the above step opening new terminals for `Telemetry_client.py` and `MotorControl_client.py`
 
-## Using the Server
-The Dashboard and Telemetry clients should prompt you to enter a message.
-If you manually input any command through the Dashboard client the server message should look like:
+When the clients are run, they are automatically registered to the server. The server should run the following:
 ```
-[Server] Received motor command from Dashboard: <motor command>
+[Server] Client registered: dashboard (type: dashboard)
+[Server] Routing message: dashboard -> motor_control: init
+[Server] Client registered: telemetry (type: telemetry)
+[Server] Routing message: telemetry -> dashboard: telemetry:connected
+[Server] Sending to dashboard: telemetry:connected
+[Server] Client registered: motor_control (type: motor_control)
+[Server] Routing message: motor_control -> server: initialized
 ```
 
 For the Telemetry client it should look like:
 ```
-[Server] Received telemetry: <telemetry update>
+[Telemetry] Client starting with ID: telemetry
+[Telemetry] Enter telemetry data (e.g., 'speed=50,temp=75'):
+[Telemetry] Type 'exit' to quit
+```
+For the Dashboard client:
+```
+[Dashboard] Client starting with ID: dashboard
+[Dashboard] Enter motor commands (e.g., 'speed=75'):
+[Dashboard] Type 'exit' to quit
+```
+For the Motor Control client:
+```
+[Motor] Client starting with ID: motor_control
+[Motor] Waiting for commands...
+```
+## Sending Messages ##
+To send a motor control command from the Dashboard, enter the command in the Dashboard client. The server will update accordingly:
+```
+[Server] Received command from Dashboard: motor: <motor command>
+[Server] Routing message: dashboard -> motor_control: motor:<motor command>
+[Server] Sending to motor control: motor:<motor command>
+```
+The motor control will receive:
+```
+[Motor] Received command: hello
+[Motor] Executing motor command...
+```
+
+To manually send telemetry updates (for testing), enter the command in the Telemetry client. The server will update accordingly:
+```
+[Server] Received telemetry: telemetry:<telemetry update>
+[Server] Routing message: telemetry -> dashboard: telemetry:<telemetry update>
+[Server] Sending to dashboard: telemetry:<telemetry update>
+```
+The dashboard will receive:
+```
+> [Dashboard] Received from telemetry: telemetry:<telemetry update>
 ```
