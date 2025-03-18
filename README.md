@@ -11,6 +11,10 @@ Before cloning the repo, ensure you:
 ```
 pip install grpcio
 ```
+- Install gRPC tools for Python
+```
+pip install grpcio-tools
+```
 - Install CAN (for use in later versions)
 ```
 pip install python-can
