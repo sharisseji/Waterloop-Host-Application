@@ -1,4 +1,3 @@
-# TEST.PY 
 import grpc
 import host_pb2
 import host_pb2_grpc
