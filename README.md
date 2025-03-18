@@ -68,7 +68,7 @@ To send a motor control command from the dashboard, enter the command in the das
 ```
 The motor control will receive:
 ```
-[Motor] Received command: hello
+[Motor] Received command: <motor command>
 [Motor] Executing motor command...
 ```
 
