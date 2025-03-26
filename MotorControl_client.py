@@ -1,7 +1,15 @@
+import can
 import grpc
 import threading
 import host_pb2
 import host_pb2_grpc
+import logging
+import struct
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+CAN_INTERFACE = 'can0' # Check if can0 is the correct configuration - check with ifconfig or ip a
+BUS = can.interface.Bus(CAN_INTERFACE, interface= 'socketcan')
 
 class MotorControlClient:
     def __init__(self, client_id="motor_control"):
@@ -32,11 +40,25 @@ class MotorControlClient:
         print("[Motor] Waiting for commands...")
         for response in response_iterator:
             if response.sender == "dashboard" and response.command.startswith("motor:"):
-                command_data = response.command.replace("motor:", "")
-                print(f"[Motor] Received command: {command_data}")
-                print("[Motor] Executing motor command...")
-                # Here you would actually execute the motor command
-                # For example: self.execute_motor_command(command_data)
+                try:
+                    # Parse the CAN message details from the command
+                    # Expected format: motor:can_id:byte1,byte2,byte3,...
+                    command_parts = response.command.split(":")
+                    if len(command_parts) >= 3:
+                        can_id = int(command_parts[1])
+                        data_bytes = [int(b) for b in command_parts[2].split(",")]
+                        
+                        # Convert to bytes format for CAN message
+                        data = bytes(data_bytes)
+                        
+                        print(f"[Motor] Received CAN message - ID: {can_id}, Data: {data}")
+                        
+                        # Execute the motor command by sending through CAN bus
+                        self.execute_motor_command(can_id, data)
+                    else:
+                        print(f"[Motor] Invalid command format: {response.command}")
+                except Exception as e:
+                    print(f"[Motor] Error processing command: {e}")
     
     def start(self):
         """Start the motor control client"""
@@ -58,6 +80,15 @@ class MotorControlClient:
         """Stop the motor control client"""
         self._stop_event.set()
         print("[Motor] Client stopping...")
+
+    def execute_motor_command(self, node_id, data):
+        try:
+            msg = can.Message(arbitration_id=node_id, data=data, is_extended_id=False)
+            BUS.send(msg)
+            logger.info(f"Sent CAN message to ID={node_id}, Data={data.hex()}")
+        except can.CanError as e:
+            logger.error(f"Failed to send CAN message: {e}")
+        # GPIO.output(RED, GPIO.HIGH)
 
 if __name__ == "__main__":
     client = MotorControlClient()

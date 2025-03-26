@@ -1,4 +1,3 @@
-# VERSION 9
 import grpc
 import threading
 import host_pb2
