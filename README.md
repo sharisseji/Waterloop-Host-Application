@@ -51,8 +51,11 @@ For the Telemetry client the initialization messages should be:
 For the Dashboard client:
 ```
 [Dashboard] Client starting with ID: dashboard
-[Dashboard] Enter motor commands (e.g., 'speed=75'):
-[Dashboard] Type 'exit' to quit
+[Dashboard] Commands:
+1. Type 'random' to send a random CAN message
+2. Type 'can:ID:DATA' where ID is CAN ID (0-2047) and DATA is comma-separated bytes
+   Example: can:123:10,20,30,40,50,60,70,80
+3. Type 'exit' to quit
 ```
 For the Motor Control client:
 ```
