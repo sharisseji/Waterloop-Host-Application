@@ -1,7 +1,7 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. 
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus.
 
-This version has only an implementation of host application architecture. Specific message formats, CAN packaging, and health checks have not yet been implemented.
+This version has only an implementation of host application architecture. Specific message formats, CAN packaging, and health checks have not fully been implemented.
 
 Code for just the Command Control State Machine can be found here: [Command Control State Machine](https://github.com/sharisseji/Waterloop-Command-Control-State-Machine.git)
 
@@ -15,7 +15,7 @@ pip install grpcio
 ```
 pip install grpcio-tools
 ```
-- Install CAN (for use in later versions)
+- Install CAN
 ```
 pip install python-can
 ```
@@ -51,8 +51,11 @@ For the Telemetry client the initialization messages should be:
 For the Dashboard client:
 ```
 [Dashboard] Client starting with ID: dashboard
-[Dashboard] Enter motor commands (e.g., 'speed=75'):
-[Dashboard] Type 'exit' to quit
+[Dashboard] Commands:
+1. Type 'random' to send a random CAN message
+2. Type 'can:ID:DATA' where ID is CAN ID (0-2047) and DATA is comma-separated bytes
+   Example: can:123:10,20,30,40,50,60,70,80
+3. Type 'exit' to quit
 ```
 For the Motor Control client:
 ```
