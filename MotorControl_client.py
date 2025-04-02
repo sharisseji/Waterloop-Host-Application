@@ -8,8 +8,11 @@ import struct
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-CAN_INTERFACE = 'can0' # Check if can0 is the correct configuration - check with ifconfig or ip a
-BUS = can.interface.Bus(CAN_INTERFACE, interface= 'socketcan')
+
+######## COMMENT OUT FOR TESTING WITHOUT CAN BUS ########
+# CAN_INTERFACE = 'can0' # Check if can0 is the correct configuration - check with ifconfig or ip a
+# BUS = can.interface.Bus(CAN_INTERFACE, interface= 'socketcan')
+#########################################################
 
 class MotorControlClient:
     def __init__(self, client_id="motor_control"):
@@ -25,7 +28,7 @@ class MotorControlClient:
         yield host_pb2.HostMessage(
             sender=self.client_id,
             recipient="server",
-            command="initialized"
+            command="Motor Control connected"
         )
         
         # Keep the client connection alive
@@ -53,8 +56,10 @@ class MotorControlClient:
                         
                         print(f"[Motor] Received CAN message - ID: {can_id}, Data: {data}")
                         
+                        ######## COMMENT OUT FOR TESTING WITHOUT THE CAN BUS ########
                         # Execute the motor command by sending through CAN bus
-                        self.execute_motor_command(can_id, data)
+                        # self.execute_motor_command(can_id, data)
+                        #############################################################
                     else:
                         print(f"[Motor] Invalid command format: {response.command}")
                 except Exception as e:
@@ -81,14 +86,16 @@ class MotorControlClient:
         self._stop_event.set()
         print("[Motor] Client stopping...")
 
-    def execute_motor_command(self, node_id, data):
-        try:
-            msg = can.Message(arbitration_id=node_id, data=data, is_extended_id=False)
-            BUS.send(msg)
-            logger.info(f"Sent CAN message to ID={node_id}, Data={data.hex()}")
-        except can.CanError as e:
-            logger.error(f"Failed to send CAN message: {e}")
-        # GPIO.output(RED, GPIO.HIGH)
+    ######## COMMENT OUT FOR TESTING WITHOUT THE CAN BUS ########
+    # def execute_motor_command(self, node_id, data):
+    #     try:
+    #         msg = can.Message(arbitration_id=node_id, data=data, is_extended_id=False)
+    #         BUS.send(msg)
+    #         logger.info(f"Sent CAN message to ID={node_id}, Data={data.hex()}")
+    #     except can.CanError as e:
+    #         logger.error(f"Failed to send CAN message: {e}")
+    #     # GPIO.output(RED, GPIO.HIGH)
+    #############################################################
 
 if __name__ == "__main__":
     client = MotorControlClient()

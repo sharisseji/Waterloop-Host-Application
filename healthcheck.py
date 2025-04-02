@@ -1,6 +1,6 @@
 import can
 import struct
-import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO # RPi.GPIO is built for RPi only
 import logging
 import time
 
@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 CAN_INTERFACE = 'can0' # Check if can0 is the correct configuration - check with ifconfig or ip a
 BUS = can.interface.Bus(CAN_INTERFACE, bustype = 'socketcan')
 
+# Board Types for reference
 # # Enum for board types
 # BMS = 0
 # ST = 1

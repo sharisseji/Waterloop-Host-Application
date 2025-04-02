@@ -22,8 +22,7 @@ class TelemetryClient:
         yield host_pb2.HostMessage(
             sender=self.client_id,
             recipient="dashboard",
-            # command="telemetry:connected"
-            command = "init"
+            command = "Telemetry connected"
         )
         
         while not self._stop_event.is_set():

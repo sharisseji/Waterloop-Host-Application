@@ -23,7 +23,7 @@ class DashboardClient:
         yield host_pb2.HostMessage(
             sender=self.client_id,
             recipient="motor_control",
-            command="init"
+            command="Dashboard connected"
         )
         
         while not self._stop_event.is_set():
