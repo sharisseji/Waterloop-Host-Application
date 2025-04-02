@@ -1,9 +1,7 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus.
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus. Health Checks are conducted on through GPIO when the system starts.
 
-This version has only an implementation of host application architecture. Specific message formats, CAN packaging, and health checks have not fully been implemented.
-
-Code for just the Command Control State Machine can be found here: [Command Control State Machine](https://github.com/sharisseji/Waterloop-Command-Control-State-Machine.git)
+Note: This version has only the implementation of the general host app architecture. Specific CAN message formats have not yet fully been implemented.
 
 ## Cloning Instructions
 Before cloning the repo, ensure you:
@@ -25,13 +23,9 @@ Open a terminal and run:
 python HostServer.py
 ```
 This should open a local host. 
-Open a second terminal and run:
-```
-python Dashboard_client.py
-```
-Repeat the above step opening new terminals for `Telemetry_client.py` and `MotorControl_client.py`
+Run `python Dashboard_client.py`, `Telemetry_client.py` and `MotorControl_client.py` in separate terminals.
 
-When the clients are run, they are automatically registered to the server. The server should run the following:
+When the clients are run, they are automatically registered to the server. The server should show the following:
 ```
 [Server] Client registered: dashboard (type: dashboard)
 [Server] Routing message: dashboard -> motor_control: init
