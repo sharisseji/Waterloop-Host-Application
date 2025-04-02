@@ -45,8 +45,11 @@ When the clients are run, they are automatically registered to the server. The s
 For the Telemetry client the initialization messages should be:
 ```
 [Telemetry] Client starting with ID: telemetry
-[Telemetry] Enter telemetry data (e.g., 'speed=50,temp=75'):
-[Telemetry] Type 'exit' to quit
+[Telemetry] Commands:
+1. Type 'random' to send a random CAN message
+2. Type 'can:ID:DATA' where ID is CAN ID (0-2047) and DATA is comma-separated bytes
+   Example: can:123:10,20,30,40,50,60,70,80
+3. Type 'exit' to quit
 ```
 For the Dashboard client:
 ```
