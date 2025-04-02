@@ -17,7 +17,9 @@ pip install grpcio-tools
 ```
 pip install python-can
 ```
-## Running the Central Server
+## Running the Host Application
+If you are testing the application without CAN, first ensure the indicated lines in `MotorControl_client.py` are commented out.
+
 Open a terminal and run:
 ```
 python HostServer.py
@@ -29,14 +31,13 @@ Run `Dashboard_client.py`, `Telemetry_client.py` and `MotorControl_client.py` in
 When the clients are run, they are automatically registered to the server. The server should show the following:
 ```
 [Server] Client registered: dashboard (type: dashboard)
-[Server] Routing message: dashboard -> motor_control: init
-[Server] Client registered: telemetry (type: telemetry)
-[Server] Routing message: telemetry -> dashboard: telemetry:connected
-[Server] Sending to dashboard: telemetry:connected
+[Server] Routing message: dashboard -> motor_control: Dashboard connected   
 [Server] Client registered: motor_control (type: motor_control)
-[Server] Routing message: motor_control -> server: initialized
+[Server] Routing message: motor_control -> server: Motor Control connected  
+[Server] Client registered: telemetry (type: telemetry)
+[Server] Routing message: telemetry -> dashboard: Telemetry connected
 ```
-
+Note the startup messages will only be routed to open clients.
 For the Telemetry client the initialization messages should be:
 ```
 [Telemetry] Client starting with ID: telemetry
@@ -61,19 +62,22 @@ For the Motor Control client:
 [Motor] Waiting for commands...
 ```
 ## Sending Messages ##
-To send a motor control command from the dashboard, enter the command in the dashboard client. The server will update accordingly:
+In this version of the implementation, CAN messages have to be manually entered to test the server routing. 
+1. Type `random` to send a random CAN message
+2. Type `can:ID:DATA` where ID is CAN ID (0-2047) and DATA is comma-separated bytes  (example: `can:123:10,20,30,40,50,60,70,80`)
+
+To send a motor control command from the dashboard, enter a command in the CAN format in the dashboard client. The server will update accordingly:
 ```
 [Server] Received command from Dashboard: motor: <motor command>
 [Server] Routing message: dashboard -> motor_control: motor:<motor command>
 [Server] Sending to motor control: motor:<motor command>
 ```
-The motor control will receive:
+When testing without the CAN bus, the motor control will receive:
 ```
-[Motor] Received command: <motor command>
-[Motor] Executing motor command...
+[Motor] Received CAN message - ID: <can id>, Data: b'<data>'
 ```
 
-To manually send telemetry updates (for testing), enter the command in the telemetry client. The server will update accordingly:
+To manually send telemetry updates for testing, enter a message in CAN format in the telemetry client. The server will update accordingly:
 ```
 [Server] Received telemetry: telemetry:<telemetry update>
 [Server] Routing message: telemetry -> dashboard: telemetry:<telemetry update>
@@ -81,5 +85,5 @@ To manually send telemetry updates (for testing), enter the command in the telem
 ```
 The dashboard will receive:
 ```
-> [Dashboard] Received from telemetry: telemetry:<telemetry update>
+[Dashboard] Received from telemetry: telemetry:<telemetry update>
 ```
