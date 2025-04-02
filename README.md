@@ -85,5 +85,5 @@ To manually send telemetry updates for testing, enter a message in CAN format in
 ```
 The dashboard will receive:
 ```
-[Dashboard] Received from telemetry: telemetry:<telemetry update as can message>
+[Dashboard] Received from telemetry: telemetry:<telemetry update>
 ```
