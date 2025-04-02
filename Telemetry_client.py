@@ -50,10 +50,10 @@ class TelemetryClient:
         # print("[Telemetry] Enter telemetry data (e.g., 'speed=50,temp=75'):")
         # print("[Telemetry] Type 'exit' to quit")
         print("[Telemetry] Commands:")
-        print("[Telemetry] 1. Type 'random' to send a random Telemetry CAN message")
-        print("[Telemetry] 2. Type 'can:ID:DATA' where ID is CAN ID (0-2047) and DATA is comma-separated bytes")
-        print("[Telemetry]    Example: can:123:10,20,30,40,50,60,70,80")
-        print("[Telemetry] 3. Type 'exit' to quit")
+        print("1. Type 'random' to send a random Telemetry CAN message")
+        print("2. Type 'can:ID:DATA' where ID is CAN ID (0-2047) and DATA is comma-separated bytes")
+        print("   Example: can:123:10,20,30,40,50,60,70,80")
+        print("3. Type 'exit' to quit")
         
         while not self._stop_event.is_set():
             try:
