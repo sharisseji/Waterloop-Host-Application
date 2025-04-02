@@ -37,7 +37,7 @@ When the clients are run, they are automatically registered to the server. The s
 [Server] Client registered: telemetry (type: telemetry)
 [Server] Routing message: telemetry -> dashboard: Telemetry connected
 ```
-Note The startup messages will only be routed to open clients.
+Note the startup messages will only be routed to open clients.
 For the Telemetry client the initialization messages should be:
 ```
 [Telemetry] Client starting with ID: telemetry
