@@ -23,7 +23,8 @@ Open a terminal and run:
 python HostServer.py
 ```
 This should open a local host. 
-Run `python Dashboard_client.py`, `Telemetry_client.py` and `MotorControl_client.py` in separate terminals.
+
+Run `Dashboard_client.py`, `Telemetry_client.py` and `MotorControl_client.py` in separate terminals.
 
 When the clients are run, they are automatically registered to the server. The server should show the following:
 ```
