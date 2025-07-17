@@ -94,7 +94,7 @@ def success_indication_led():
     GPIO.output(RED, GPIO.LOW)
     # Turn on the success indication LED
     GPIO.output(GREEN, GPIO.HIGH)
-    GPIO.cleanup()  # Clean up GPIO pinss
+    GPIO.cleanup()  # Clean up GPIO pins
  
 if __name__ == "__main__":
     send_telemetry()
