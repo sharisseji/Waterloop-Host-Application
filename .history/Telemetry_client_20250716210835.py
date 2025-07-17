@@ -194,7 +194,6 @@ class TelemetryClient:
                     return f"Telemetry: SENSORS: {arbitration_id}:{data} (insufficient data)"
 
             # elif arbitration_id ==  IMU_ID: # don't have the ID of the IMU yet, string for testing, hex/binary for CAN bus
-            else:
                 logger.info("Telemetry Data type: IMU")
                 if len(data_bytes) == 8:
                     # Combine bytes into 2-byte integer values for accelerometer

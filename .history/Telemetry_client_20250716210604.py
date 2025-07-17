@@ -156,14 +156,11 @@ class TelemetryClient:
             # FOR BYTES OBJECT (REAL CAN DATA) - UNCOMMENT WHEN USING ACTUAL CAN BUS:
             # data_bytes = list(data) if isinstance(data, bytes) else data.split(',') if isinstance(data, str) else data
             
-            # UNFINALIZED BOARD IDS
-            BMS_ID = 0x1e       # BMS STM32 Board CAN ID
-            SENSORS_ID = 0xFF   # S&T STM32 Board CAN ID
-            IMU_ID = 0xFF       # IMU Board CAN ID (not finalized yet)
-
             # parse the arbitration_id
-            # if arbitration_id == BMS_ID: 
-            if arbitration_id == "0x1e": # BMS STM32 Board CAN ID, should not be a string when testing with CAN
+            BMS_ID = 0x1e  # BMS STM32 Board CAN ID
+            SENSORS_ID = 0xFF  # S&T STM32 Board CAN ID
+            IMU_ID = 0xFF # IMU Board CAN ID (not finalized yet)
+            if arbitration_id == '0x1e': # BMS STM32 Board CAN ID, should not be a string when testing with CAN
                 # FOR BYTES OBJECT: if arbitration_id == 0x1e:
                 logger.info("Telemetry Data type: BMS")
                 if len(data_bytes) <= 8:
@@ -178,8 +175,7 @@ class TelemetryClient:
                 else:
                     return f"Telemetry: BMS: {arbitration_id}:{data} (insufficient data)"
             
-            # elif arbitration_id == SENSORS_ID: # S&T STM32 Board CAN ID, should be string for testing
-            elif arbitration_id == "0xFF": # S&T STM32 Board CAN ID, should be string for testing
+            elif arbitration_id == '0xFF': # S&T STM32 Board CAN ID, should be string for testing
                 # FOR BYTES OBJECT: elif arbitration_id == 0xFF:
                 logger.info("Telemetry Data type: SENSORS")
                 if len(data_bytes) == 8:
@@ -192,9 +188,8 @@ class TelemetryClient:
                     return f"Telemetry: SENSORS: LIM_ONE={LIM_ONE}, LIM_TWO={LIM_TWO}, LIM_THREE={LIM_THREE}, PRESSURE={PRESSURE}, ERROR_ID={ERROR_ID}"
                 else:
                     return f"Telemetry: SENSORS: {arbitration_id}:{data} (insufficient data)"
-
-            # elif arbitration_id ==  IMU_ID: # don't have the ID of the IMU yet, string for testing, hex/binary for CAN bus
-            else:
+            
+            else: # don't have the ID of the IMU yet, string for testing, hex/binary for CAN bus
                 logger.info("Telemetry Data type: IMU")
                 if len(data_bytes) == 8:
                     # Combine bytes into 2-byte integer values for accelerometer
