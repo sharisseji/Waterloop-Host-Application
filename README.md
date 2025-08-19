@@ -1,7 +1,7 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus. Health Checks are conducted on through GPIO when the system starts.
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus. Health Checks are conducted through GPIO when the system starts.
 
-Note: This version has only the implementation of the general host app architecture. Specific CAN message formats have not yet fully been implemented.
+Note: This version uses temporary CAN message formats. These are subject to change.
 
 ## Cloning Instructions
 Before cloning the repo, ensure you:
