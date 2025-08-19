@@ -97,8 +97,7 @@ When testing without the CAN bus, the motor control will receive:
 ### Telemetry-Dashboard
 To manually send telemetry updates for testing, enter a message in CAN format in the telemetry client. NOTE: Currently, there are no set IDs for the Telemetry, so the only messages you can send are random:
 
-1. Enter `random` to send a random Telemetry CAN message")
-2. Enter `can:ID:DATA` where ID = CAN ID (0-2047) and DATA is comma-separated bytes"). 
+1. Enter `can:ID:DATA` where ID = CAN ID (0-2047) and DATA is comma-separated bytes"). 
 
    Example: `can:123:10,20,30,40,50,60,70,80`
 
