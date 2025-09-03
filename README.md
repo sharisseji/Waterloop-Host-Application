@@ -1,5 +1,5 @@
 # Waterloop-Host-Application
-In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus. Health Checks are conducted through GPIO when the system starts.
+In development. Code for the distributed flight computer host application of Waterloop's Hyperloop Pod. This uses multiple clients and bidirectional streaming gRPCs to manage both the Telemetry and Motor Command Control State Machines located on the central Raspberry Pi as well as the web-hosted Dashboard. State Machines send and receive messages on STM32s through a CAN bus. Health Checks are conducted through independent GPIO I/O when the system starts.
 
 Note: This version uses temporary CAN message formats. These are subject to change.
 
@@ -95,7 +95,7 @@ When testing without the CAN bus, the motor control will receive:
 [Motor] Would send CAN message: ID=0x123, Data=225A
 ```
 ### Telemetry-Dashboard
-To manually send telemetry updates for testing, enter a message in CAN format in the telemetry client. NOTE: Currently, there are no set IDs for the Telemetry, so the only messages you can send are random:
+To manually send telemetry updates for testing, enter a message in CAN format in the telemetry client. NOTE: Currently, the IDs for Telemetry are temporary. Check the code for the specific IDs.
 
 1. Enter `can:ID:DATA` where ID = CAN ID (0-2047) and DATA is comma-separated bytes"). 
 
